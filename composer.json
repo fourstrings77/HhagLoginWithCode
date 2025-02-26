@@ -1,0 +1,27 @@
+{
+    "name": "hhag-login-with-code/hhag-login-with-code",
+    "description": "hhag-login-with-code/hhag-login-with-code",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "HhagLoginWithCode\\HhagLoginWithCode",
+        "label": {
+            "de-DE": "Skeleton plugin",
+            "en-GB": "Skeleton plugin"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "HhagLoginWithCode\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HhagLoginWithCode\\Tests\\": "tests/"
+        }
+    }
+}
