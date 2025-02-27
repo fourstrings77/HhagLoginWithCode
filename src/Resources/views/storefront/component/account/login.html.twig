@@ -1,5 +1,11 @@
 {% sw_extends '@Storefront/storefront/component/account/login.html.twig' %}
 
-{% block component_account_login %}
-
+{% block component_account_login_form %}
+    {{ parent() }}
+    <div class="login-code-option text-center mt-4">
+        <p>{{ "Sie haben kein Passwort? Loggen Sie sich mit einem Code ein!"|trans }}</p>
+        <a href="{{ path('frontend.account.login.request_code') }}" class="btn btn-primary">
+            {{ "Login mit Code" | trans }}
+        </a>
+    </div>
 {% endblock %}
