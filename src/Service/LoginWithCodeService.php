@@ -36,8 +36,9 @@ class LoginWithCodeService
 
         $this->customerRepository->update([
             'id' => $customer->getId(),
-            'extensions' => [
+            'extensions' => [[
                 'login_code' => $code,
+                ],
             ]
         ], $this->context);
 

@@ -54,6 +54,6 @@ class LoginWithCodeController extends StorefrontController
         $lwcService = new LoginWithCodeService($this->customerEntity, $context->getContext());
         $code = $lwcService->createAndSaveCode($customer->getEmail());
 
-        dd($code);
+
     }
 }
