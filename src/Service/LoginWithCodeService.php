@@ -18,8 +18,8 @@ class LoginWithCodeService
     protected MailerInterface $mailer;
     protected Context $context;
 
-    public function __construct(MailerInterface $mailer, EntityRepository $customerRepository, Context $context){
-            $this->mailer = $mailer;
+    public function __construct(/*MailerInterface $mailer,*/ EntityRepository $customerRepository, Context $context){
+            //$this->mailer = $mailer;
             $this->customerRepository = $customerRepository;
             $this->context = $context;
     }
@@ -28,7 +28,7 @@ class LoginWithCodeService
 
         $code = random_int(100000, 999999);
 
-        $customer = $this->customerRepository->search(new Criteria([$customerEmail]), $this->context)->first();
+        $customer = $this->customerRepository->search((new Criteria())->addFilter(new EqualsFilter('email', $customerEmail)), $this->context)->first();
 
         if(!$customer){
             throw new CustomerNotFoundException($customerEmail);

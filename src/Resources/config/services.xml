@@ -9,6 +9,8 @@
 
         <service id="HhagLoginWithCode\Storefront\Controller\LoginWithCodeController" public="true">
             <argument type="service" id="Shopware\Storefront\Page\Account\Login\AccountLoginPageLoader" />
+            <argument type="service" id="customer.repository" />
+
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
