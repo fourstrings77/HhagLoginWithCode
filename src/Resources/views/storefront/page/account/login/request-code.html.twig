@@ -1,0 +1,12 @@
+{% sw_extends "@Storefront/storefront/page/account/register/index.html.twig" %}
+
+{% block page_account_register_login_container %}
+    <div class="col-lg-4">
+        {% sw_include '@Storefront/storefront/component/account/request-code.html.twig' with {
+            cardTitle: 'account.loginHeader'|trans|sw_sanitize
+        } %}
+        {% block page_account_register_advantages %}
+        {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}
