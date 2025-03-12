@@ -18,15 +18,14 @@ class LoginWithCodeService
     protected MailerInterface $mailer;
     protected Context $context;
 
-    public function __construct(/*MailerInterface $mailer,*/ EntityRepository $customerRepository, Context $context){
-            //$this->mailer = $mailer;
+    public function __construct(EntityRepository $customerRepository, Context $context){
             $this->customerRepository = $customerRepository;
             $this->context = $context;
     }
 
-    public function createAndSaveCode(string $customerEmail): int{
+    public function createAndSaveCode(string $customerEmail): String{
+        $code = $this->createCode();
 
-        $code = random_int(100000, 999999);
 
         $customer = $this->customerRepository->search((new Criteria())->addFilter(new EqualsFilter('email', $customerEmail)), $this->context)->first();
 
@@ -34,16 +33,22 @@ class LoginWithCodeService
             throw new CustomerNotFoundException($customerEmail);
         }
 
-        $this->customerRepository->update([
+        /*$this->customerRepository->update([
             'id' => $customer->getId(),
             'extensions' => [[
                 'login_code' => $code,
                 ],
             ]
-        ], $this->context);
+        ], $this->context);*/
 
-        return $code;
+
+       $split = str_split( (string) $code, 3);
+
+       return implode('-', $split);;
     }
 
+    public function createCode(): int{
+        return random_int(100000, 999999);
+    }
 
 }
