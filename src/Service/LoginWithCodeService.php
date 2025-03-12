@@ -3,6 +3,7 @@
 namespace HhagLoginWithCode\Service;
 
 use Brick\Math\Exception\IntegerOverflowException;
+use Shopware\Core\Checkout\Customer\CustomerEntity;
 use Shopware\Core\Checkout\Customer\Exception\CustomerNotFoundException;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
@@ -27,7 +28,7 @@ class LoginWithCodeService
         $code = $this->createCode();
 
 
-        $customer = $this->customerRepository->search((new Criteria())->addFilter(new EqualsFilter('email', $customerEmail)), $this->context)->first();
+        $customer = $this->getCustomerByEmail($customerEmail);
 
         if(!$customer){
             throw new CustomerNotFoundException($customerEmail);
@@ -49,6 +50,10 @@ class LoginWithCodeService
 
     public function createCode(): int{
         return random_int(100000, 999999);
+    }
+
+    public function getCustomerByEmail(string $email): CustomerEntity{
+        return $this->customerRepository->search((new Criteria())->addFilter(new EqualsFilter('email', $email)), $this->context)->first();
     }
 
 }

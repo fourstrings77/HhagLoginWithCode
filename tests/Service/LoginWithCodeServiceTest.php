@@ -19,14 +19,14 @@ class LoginWithCodeServiceTest extends TestCase
     protected function setUp(): void{
         $this->customerRepoMock = $this->createMock(EntityRepository::class);
         $this->contextMock = $this->createMock(Context::class);
+
+        $this->loginWithCodeService = new LoginWithCodeService($this->customerRepoMock, $this->contextMock);
     }
     public function testServiceIsInstantiable(): void{
-        $service = new LoginWithCodeService($this->customerRepoMock, $this->contextMock);
-
-        $this->assertInstanceOf(LoginWithCodeService::class, $service);
+        $this->assertInstanceOf(LoginWithCodeService::class, $this->loginWithCodeService);
     }
     public function testCodeIsInteger(){
-        $code = (new LoginWithCodeService($this->customerRepoMock, $this->contextMock))->createCode();
+        $code = $this->loginWithCodeService->createCode();
         $this->assertIsInt($code);
     }
 }
