@@ -27,6 +27,9 @@ class LoginWithCodeServiceTest extends TestCase
     }
     public function testCodeIsInteger(){
         $code = $this->loginWithCodeService->createCode();
+
+        $this->assertEquals(6, strlen($code));
+        $this->assertNotNull($code);
         $this->assertIsInt($code);
     }
 }

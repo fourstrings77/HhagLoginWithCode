@@ -36,16 +36,12 @@ class LoginWithCodeServiceIntegrationTest extends  TestCase
         $criteria->addFilter(new EqualsFilter('email', $email));
 
         $customerExists = $this->customerRepository->search($criteria, $this->context)->getTotal() > 0;
-        $this->assertTrue($customerExists, 'Der Kunde wurde nicht in der Datenbank gespeichert!');
+        $this->assertTrue($customerExists);
 
     }
     public function testGetCustomerByMail(): void {
         $email = 'test@example.com';
-        $customerId = Uuid::randomHex();
-        $addressId = Uuid::randomHex();
-
         $this->customerRepository->create($this->setCustomerData(), $this->context);
-
 
         $customer = $this->loginWithCodeService->getCustomerByEmail($email);
 
@@ -75,7 +71,7 @@ class LoginWithCodeServiceIntegrationTest extends  TestCase
         return $customerGroupRepo->searchIds($criteria, $context)->firstId();
     }
 
-    private function setCustomerData(){
+    private function setCustomerData(): array{
         $email = 'test@example.com';
         $customerId = Uuid::randomHex();
         $addressId = Uuid::randomHex();
