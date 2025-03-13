@@ -1,0 +1,12 @@
+parameters:
+    paths:
+        - src
+        - tests
+    level: 8
+    bootstrapFiles:
+        - vendor/autoload.php
+        - /var/www/html/vendor/autoload.php
+
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    #- vendor/shopwarelabs/phpstan-shopware/rules.neon

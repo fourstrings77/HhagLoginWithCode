@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace HhagLoginWithCode\Migration;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Defaults;
 use Shopware\Core\Framework\Migration\MigrationStep;
@@ -27,7 +26,7 @@ class Migration1740659824AddType extends MigrationStep
     {
     }
 
-    public function createMailTemplateType(Connection $connection)
+    public function createMailTemplateType(Connection $connection): string
     {
         $typeId = Uuid::randomHex();
 
@@ -38,48 +37,48 @@ class Migration1740659824AddType extends MigrationStep
         $germanName = 'Beispiel E-Mail Template Name';
 
         $connection->executeStatement(
-            "INSERT IGNORE INTO `mail_template_type`
+            'INSERT IGNORE INTO `mail_template_type`
                 (id, technical_name, available_entities, created_at)
             VALUES
                 (:id, :technicalName, :availableEntities, :createdAt)
-        ",[
-            'id' => Uuid::fromHexToBytes($typeId),
-            'technicalName' => 'lwc_mail_template_type',
-            'availableEntities' => json_encode(['customer' => 'customer']),
-            'createdAt' => (new DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
-          ]
+        ',
+            [
+                'id' => Uuid::fromHexToBytes($typeId),
+                'technicalName' => 'lwc_mail_template_type',
+                'availableEntities' => json_encode(['customer' => 'customer']),
+                'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
+            ]
         );
-
 
         return $typeId;
     }
 
-    public function createMailTemplate(Connection $connection, $mailTemplateTypeId): void
+    public function createMailTemplate(Connection $connection, string $mailTemplateTypeId): void
     {
         $mailTemplateId = Uuid::randomHex();
 
         $enGbLangId = $this->getLanguageByLocale($connection, 'en-GB');
         $deDeLangId = $this->getLanguageByLocale($connection, 'de-DE');
 
-        $connection->executeStatement("
+        $connection->executeStatement('
         INSERT IGNORE INTO `mail_template`
             (id, mail_template_type_id, system_default, created_at)
         VALUES
             (:id, :mailTemplateTypeId, :systemDefault, :createdAt)
-        ",[
+        ', [
             'id' => Uuid::fromHexToBytes($mailTemplateId),
             'mailTemplateTypeId' => Uuid::fromHexToBytes($mailTemplateTypeId),
             'systemDefault' => 0,
-            'createdAt' => (new DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
+            'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
         ]);
 
         if (!empty($enGbLangId)) {
-            $connection->executeStatement("
+            $connection->executeStatement('
             INSERT IGNORE INTO `mail_template_translation`
                 (mail_template_id, language_id, sender_name, subject, description, content_html, content_plain, created_at)
             VALUES
                 (:mailTemplateId, :languageId, :senderName, :subject, :description, :contentHtml, :contentPlain, :createdAt)
-            ",[
+            ', [
                 'mailTemplateId' => Uuid::fromHexToBytes($mailTemplateId),
                 'languageId' => $enGbLangId,
                 'senderName' => '{{ salesChannel.name }}',
@@ -87,17 +86,17 @@ class Migration1740659824AddType extends MigrationStep
                 'description' => 'Example mail template description',
                 'contentHtml' => $this->getContentHtmlEn(),
                 'contentPlain' => $this->getContentPlainEn(),
-                'createdAt' => (new DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
+                'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
             ]);
         }
 
         if (!empty($deDeLangId)) {
-            $connection->executeStatement("
+            $connection->executeStatement('
             INSERT IGNORE INTO `mail_template_translation`
                 (mail_template_id, language_id, sender_name, subject, description, content_html, content_plain, created_at)
             VALUES
                 (:mailTemplateId, :languageId, :senderName, :subject, :description, :contentHtml, :contentPlain, :createdAt)
-            ",[
+            ', [
                 'mailTemplateId' => Uuid::fromHexToBytes($mailTemplateId),
                 'languageId' => $deDeLangId,
                 'senderName' => '{{ salesChannel.name }}',
@@ -105,10 +104,9 @@ class Migration1740659824AddType extends MigrationStep
                 'description' => 'Basistemplate für den Login-Code',
                 'contentHtml' => $this->getContentHtmlDe(),
                 'contentPlain' => $this->getContentPlainDe(),
-                'createdAt' => (new DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
+                'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
             ]);
         }
-
     }
 
     private function getContentHtmlEn(): string

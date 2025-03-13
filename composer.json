@@ -10,8 +10,8 @@
     "extra": {
         "shopware-plugin-class": "HhagLoginWithCode\\HhagLoginWithCode",
         "label": {
-            "de-DE": "Skeleton plugin",
-            "en-GB": "Skeleton plugin"
+            "de-DE": "Login per Code",
+            "en-GB": "Login with Code"
         }
     },
     "autoload": {
@@ -22,6 +22,16 @@
     "autoload-dev": {
         "psr-4": {
             "HhagLoginWithCode\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.71",
+        "shopwarelabs/phpstan-shopware": "^0.1.9",
+        "phpstan/phpstan-phpunit": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": true
         }
     }
 }

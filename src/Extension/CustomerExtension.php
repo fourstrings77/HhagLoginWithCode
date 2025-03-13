@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace HhagLoginWithCode\Extension;
 
@@ -12,11 +14,11 @@ class CustomerExtension extends EntityExtension
     public function extendFields(FieldCollection $collection): void
     {
         $collection->add(
-            (new IntField('login_code', 'loginCode'))
+            new IntField('login_code', 'loginCode')
         );
     }
 
-    public function getEntityName(): string
+    public function getDefinitionClass(): string
     {
         return CustomerDefinition::class;
     }
