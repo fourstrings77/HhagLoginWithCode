@@ -2,12 +2,18 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
          bootstrap="tests/TestBootstrap.php"
+         testdox="false"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnPhpunitDeprecations="true"
          executionOrder="random">
-    <coverage>
+    <!-- coverage>
         <include>
             <directory>./src/</directory>
         </include>
-    </coverage>
+    </coverage -->
     <php>
         <ini name="error_reporting" value="-1"/>
         <server name="KERNEL_CLASS" value="Shopware\Core\Kernel"/>

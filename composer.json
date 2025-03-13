@@ -28,6 +28,7 @@
         "friendsofphp/php-cs-fixer": "^3.71",
         "shopwarelabs/phpstan-shopware": "^0.1.9",
         "phpstan/phpstan-phpunit": "^2.0"
+
     },
     "config": {
         "allow-plugins": {
