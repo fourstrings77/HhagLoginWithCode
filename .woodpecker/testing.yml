@@ -3,5 +3,5 @@ steps:
     image: dockware/dev:latest
     commands:
       - ls -asl
-      - cwd
+      - pwd
       - /var/www/vendor/bin/phpunit -c /var/www/custom/plugins/HhagLoginWithCode/phpunit.xml
