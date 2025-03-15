@@ -1,7 +1,12 @@
+clone:
+  - name: git
+    image: woodpeckerci/plugin-git
+    settings:
+      path: /var/www/custom/plugins/
 steps:
   - name: phpunit
     image: dockware/dev:latest
     commands:
-      - ls -asl
       - pwd
+      - ls -asl /var/www/custom/plugins
       - /var/www/vendor/bin/phpunit -c /var/www/custom/plugins/HhagLoginWithCode/phpunit.xml
