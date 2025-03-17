@@ -10,7 +10,7 @@ steps:
       - pwd
       - ls -asl ./plugin
       - docker run --rm -d -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ --name shopware_4 dockware/dev:latest
-      - docker exec shopware_4 tree /var/www/
+      - docker exec shopware_4 ls -asl /var/www/
       #- docker exec shopware_4 /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
 
       - docker stop shopware shopware_1 shopware_2 shopware_3 shopware_4
