@@ -7,7 +7,7 @@ steps:
   - name: phpstan
     image: docker
     commands:
-      - docker container stop $(docker container ls -q --filter name=shopware)
+      - docker container stop shopware
       - docker run --rm -d --name shopware dockware/dev:latest
       - docker exec shopware mkdir -p /var/www/html/custom/plugins/HhagLoginWithCode
       - docker cp plugin/. shopware:/var/www/html/custom/plugins/HhagLoginWithCode/.
