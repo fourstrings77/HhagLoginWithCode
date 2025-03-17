@@ -11,5 +11,6 @@ steps:
       - ls -asl ./plugin
       - docker run --rm -p 89:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ dockware/dev:latest
       - docker exec /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
+      - docker stop
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
