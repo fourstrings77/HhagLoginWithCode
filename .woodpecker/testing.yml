@@ -4,13 +4,15 @@ clone:
     settings:
       path: ./plugin/
 steps:
-  - name: phpunit
+  - name: phpstan
     image: docker
     commands:
-      - docker run --rm -d --name shopware_4 dockware/dev:latest
-      - docker exec shopware_4 mkdir -p /var/www/html/custom/plugins/HhagLoginWithCode
-      - docker cp plugin/. shopware_4:/var/www/html/custom/plugins/HhagLoginWithCode/.
-      - docker exec shopware_4 /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
-      - docker container stop $(docker container ls -q --filter name=shopware_)
+      - docker container stop $(docker container ls -q --filter name=shopware)
+      - docker run --rm -d --name shopware dockware/dev:latest
+      - docker exec shopware mkdir -p /var/www/html/custom/plugins/HhagLoginWithCode
+      - docker cp plugin/. shopware:/var/www/html/custom/plugins/HhagLoginWithCode/.
+      - docker exec shopware cd /var/var/www/html/custom/plugins/HhagLoginWithCode && composer update && /var/www/html/custom/plugins/HhagLoginWithCode/vendor/bin/phpstan
+      #- docker exec shopware /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
