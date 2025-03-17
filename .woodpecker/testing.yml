@@ -7,12 +7,11 @@ steps:
   - name: phpstan
     image: docker
     commands:
-      - docker container stop shopware
-      - docker run --rm -d --name shopware dockware/dev:latest
-      - docker exec shopware mkdir -p /var/www/html/custom/plugins/HhagLoginWithCode
-      - docker cp plugin/. shopware:/var/www/html/custom/plugins/HhagLoginWithCode/.
-      - docker exec shopware cd /var/var/www/html/custom/plugins/HhagLoginWithCode && composer update && /var/www/html/custom/plugins/HhagLoginWithCode/vendor/bin/phpstan
-      #- docker exec shopware /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
+      - docker run --rm -d --name shopware_${CI_COMMIT_SHA} dockware/dev:latest
+      - docker exec shopware_${CI_COMMIT_SHA} mkdir -p /var/www/html/custom/plugins/HhagLoginWithCode
+      - docker cp plugin/. shopware_${CI_COMMIT_SHA}:/var/www/html/custom/plugins/HhagLoginWithCode/.
+      - docker exec shopware_${CI_COMMIT_SHA} cd /var/var/www/html/custom/plugins/HhagLoginWithCode && composer update && /var/www/html/custom/plugins/HhagLoginWithCode/vendor/bin/phpstan
+      - docker stop shopware_${CI_COMMIT_SHA}
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
