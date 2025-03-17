@@ -9,6 +9,6 @@ steps:
     commands:
       - pwd
       - ls -asl ./plugin
-      - docker run --rm -p 80:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ dockware/dev:latest
+      - docker run --rm -p 89:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ dockware/dev:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
