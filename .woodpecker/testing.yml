@@ -7,8 +7,10 @@ steps:
   - name: phpunit
     image: docker
     commands:
-      - docker run --rm -d -v ./plugin/:/var/www/custom/plugins/HhagLoginWithCode/ --name shopware dockware/dev:latest
+      - docker run --rm -d --name shopware dockware/dev:latest
       - docker exec shopware ls -asl /var/www/
+      - docker exec shopware mkdir -p /var/www/custom/plugins/HhagLoginWithCode
+      - docker cp -r plugin/HhagLoginWithCode/. shopware:/var/www/custom/plugins/HhagLoginWithCode/.
       - docker exec shopware ls -asl /var/www/custom/plugins/HhagLoginWithCode
       #- docker exec shopware /var/www/vendor/bin/phpunit -c /var/www/custom/plugins/HhagLoginWithCode/phpunit.xml
       - docker stop shopware
