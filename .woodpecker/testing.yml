@@ -9,7 +9,7 @@ steps:
     commands:
       - pwd
       - ls -asl ./plugin
-      - docker run --rm -d -p 95:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ --name shopware_1 dockware/dev:latest
-      - docker exec -ti shopware_1 /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
+      - docker run --rm -d -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ --name shopware_2 dockware/dev:latest
+      - docker exec -ti shopware_2 /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
