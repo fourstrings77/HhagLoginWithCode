@@ -9,5 +9,5 @@ steps:
     commands:
       - pwd
       - sleep 20
-      - clear
+      - ls -asl
       - docker ps
