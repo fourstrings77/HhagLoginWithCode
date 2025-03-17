@@ -9,5 +9,4 @@ steps:
     commands:
       - pwd
       - sleep 20
-      - ls -asl
-      - docker ps
+      - ls -asl ./plugin
