@@ -10,3 +10,6 @@ steps:
       - pwd
       - sleep 20
       - ls -asl ./plugin
+      - docker ps
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
