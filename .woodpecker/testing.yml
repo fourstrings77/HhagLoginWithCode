@@ -10,7 +10,7 @@ steps:
       - docker run --rm -d --name shopware_${CI_COMMIT_SHA} dockware/dev:latest
       - docker exec shopware_${CI_COMMIT_SHA} mkdir -p /var/www/html/custom/plugins/HhagLoginWithCode
       - docker cp plugin/. shopware_${CI_COMMIT_SHA}:/var/www/html/custom/plugins/HhagLoginWithCode/.
-      - docker exec shopware_${CI_COMMIT_SHA} cd /var/var/www/html/custom/plugins/HhagLoginWithCode && composer update && /var/www/html/custom/plugins/HhagLoginWithCode/vendor/bin/phpstan
+      - docker exec shopware_${CI_COMMIT_SHA} /var/www/html/custom/plugins/HhagLoginWithCode/vendor/bin/phpstan
       - docker stop shopware_${CI_COMMIT_SHA}
 
     volumes:
