@@ -9,7 +9,8 @@ steps:
     commands:
       - pwd
       - ls -asl ./plugin
-      - docker run --rm -p 90:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ dockware/dev:latest
+      - docker stop
+      - docker run --rm -d -p 91:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ dockware/dev:latest
       - docker exec /var/www/html/vendor/bin/phpunit -c /var/www/html/custom/plugins/HhagLoginWithCode/phpunit.xml
       - docker stop
     volumes:
