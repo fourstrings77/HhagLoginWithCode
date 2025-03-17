@@ -5,11 +5,10 @@ clone:
       path: ./plugin/
 steps:
   - name: phpunit
-    image: dockware/dev:latest
+    image: docker
     commands:
       - pwd
-      - sleep 20
       - ls -asl ./plugin
-      - docker ps
+      - docker run --rm -p 80:80 -v ./plugin/:/var/www/html/custom/plugins/HhagLoginWithCode/ dockware/dev:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
